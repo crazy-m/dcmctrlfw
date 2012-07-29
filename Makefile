@@ -71,7 +71,7 @@ FORMAT = ihex
 
 
 # Target file name (without extension).
-TARGET = dcmctrl
+TARGET = dcmctrlfw
 
 
 # Object files directory

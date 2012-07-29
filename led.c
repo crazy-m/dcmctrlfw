@@ -30,3 +30,42 @@ void led_init(void)
 	LED1_PORT &= ~_BV(LED1_PIO);
 	LED2_PORT &= ~_BV(LED2_PIO);
 }
+
+void led_on(uint8_t led)
+{
+	switch (led)
+	{
+		case LED1:
+			LED1_PORT |= _BV(LED1_PIO);
+			break;
+		case LED2:
+			LED2_PORT |= _BV(LED2_PIO);
+			break;
+	}
+}
+
+void led_off(uint8_t led)
+{
+	switch (led)
+	{
+		case LED1:
+			LED1_PORT &= ~_BV(LED1_PIO);
+			break;
+		case LED2:
+			LED2_PORT &= ~_BV(LED2_PIO);
+			break;
+	}
+}
+
+void led_toggle(uint8_t led)
+{
+	switch (led)
+	{
+		case LED1:
+			LED1_PORT ^= _BV(LED1_PIO);
+			break;
+		case LED2:
+			LED2_PORT ^= _BV(LED2_PIO);
+			break;
+	}
+}

@@ -21,15 +21,15 @@
 #ifndef _AC_H_
 #define _AC_H_
 
-#define AC_AIN0_DDR DDRE
+#define AC_AIN0_DDR  DDRE
 #define AC_AIN0_PORT PORTE
-#define AC_AIN0_PIN PINE
-#define AC_AIN0_PIO PE2
+#define AC_AIN0_PIN  PINE
+#define AC_AIN0_PIO  PE2
 
-#define AC_AIN1_DDR DDRE
+#define AC_AIN1_DDR  DDRE
 #define AC_AIN1_PORT PORTE
-#define AC_AIN1_PIN PINE
-#define AC_AIN1_PIO PE3
+#define AC_AIN1_PIN  PINE
+#define AC_AIN1_PIO  PE3
 
 void ac_init(void);
 

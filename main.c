@@ -61,7 +61,7 @@ int main(void)
 	qe_init();
 	usart0_init();
 
-	sei();
+	sei(); // go live :-)
 
 	for(;;)
 	{

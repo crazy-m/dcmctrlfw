@@ -42,12 +42,12 @@ ISR(ANALOG_COMP_vect)
 	{
 		// normal
 		TCCR1A |= _BV(COM1A1);
-		LED2_PORT &= ~_BV(LED2_PIO);
+		led_off(LED2);
 	}
 	else
 	{
 		// overcurrent
 		TCCR1A &= ~_BV(COM1A1);
-		LED2_PORT |= _BV(LED2_PIO);
+		led_on(LED2);
 	}
 }

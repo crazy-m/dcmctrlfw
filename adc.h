@@ -21,20 +21,20 @@
 #ifndef _ADC_H_
 #define _ADC_H_
 
-#define ADC0_DDR DDRF
+#define ADC0_DDR  DDRF
 #define ADC0_PORT PORTF
-#define ADC0_PIN PINF
-#define ADC0_PIO PF0
+#define ADC0_PIN  PINF
+#define ADC0_PIO  PF0
 
-#define ADC1_DDR DDRF
+#define ADC1_DDR  DDRF
 #define ADC1_PORT PORTF
-#define ADC1_PIN PINF
-#define ADC1_PIO PF1
+#define ADC1_PIN  PINF
+#define ADC1_PIO  PF1
 
-#define ADC2_DDR DDRF
+#define ADC2_DDR  DDRF
 #define ADC2_PORT PORTF
-#define ADC2_PIN PINF
-#define ADC2_PIO PF2
+#define ADC2_PIN  PINF
+#define ADC2_PIO  PF2
 
 void adc_init(void);
 float adc_read_vbat(void);

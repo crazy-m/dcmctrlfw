@@ -25,9 +25,9 @@
 #define I2C_BITRATE_kHz 100
 
 
-#define I2C_SDA_DDR DDRD
+#define I2C_SDA_DDR  DDRD
 #define I2C_SDA_PORT PORTD
-#define I2C_SDA_PIN PD1
+#define I2C_SDA_PIN  PD1
 
 void i2c_init(void);
 void i2c_setbitrate(uint8_t bitrate_kHz);

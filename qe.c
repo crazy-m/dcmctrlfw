@@ -24,8 +24,8 @@
 #include "qe.h"
 #include "led.h"
 
-int16_t qe_position=0;
-uint16_t qe_cycles=0;
+volatile int16_t qe_position=0;
+volatile uint16_t qe_cycles=0;
 
 void qe_init(void)
 {

@@ -21,27 +21,27 @@
 #ifndef _QE_H_
 #define _QE_H_
 
-#define QE_CH_A_DDR DDRD
+#define QE_CH_A_DDR  DDRD
 #define QE_CH_A_PORT PORTD
-#define QE_CH_A_PIN PIND
-#define QE_CH_A_PIO PD2
+#define QE_CH_A_PIN  PIND
+#define QE_CH_A_PIO  PD2
 
-#define QE_CH_A_INT INT2
-#define QE_CH_A_ISC ISC21
+#define QE_CH_A_INT  INT2
+#define QE_CH_A_ISC  ISC21
 #define QE_CH_A_VECT INT2_vect
 
-#define QE_CH_B_DDR DDRD
+#define QE_CH_B_DDR  DDRD
 #define QE_CH_B_PORT PORTD
-#define QE_CH_B_PIN PIND
-#define QE_CH_B_PIO PD4
+#define QE_CH_B_PIN  PIND
+#define QE_CH_B_PIO  PD4
 
-#define QE_CH_I_DDR DDRD
+#define QE_CH_I_DDR  DDRD
 #define QE_CH_I_PORT PORTD
-#define QE_CH_I_PIN PIND
-#define QE_CH_I_PIO PD3
+#define QE_CH_I_PIN  PIND
+#define QE_CH_I_PIO  PD3
 
-#define QE_CH_I_INT INT3
-#define QE_CH_I_ISC ISC31
+#define QE_CH_I_INT  INT3
+#define QE_CH_I_ISC  ISC31
 #define QE_CH_I_VECT INT3_vect
 
 void qe_init(void);

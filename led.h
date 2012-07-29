@@ -21,6 +21,9 @@
 #ifndef _LED_H_
 #define _LED_H_
 
+#define LED1 0x01
+#define LED2 0x02
+
 #define LED1_DDR  DDRD
 #define LED1_PORT PORTD
 #define LED1_PIO  PD7
@@ -30,5 +33,8 @@
 #define LED2_PIO  PG0
 
 void led_init(void);
+void led_on(uint8_t led);
+void led_off(uint8_t led);
+void led_toggle(uint8_t led);
 
 #endif /* _LED_H_ */

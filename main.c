@@ -22,6 +22,7 @@
 #include <stdlib.h>
 
 #include <avr/io.h>
+#include <avr/eeprom.h>
 #include <avr/fuse.h>
 #include <avr/interrupt.h>
 #include <avr/power.h>
@@ -37,11 +38,14 @@
 #include "qe.h"
 #include "usart.h"
 
-FUSES = {
+FUSES =
+	{
 	.low  = (FUSE_CKOUT & FUSE_SUT1),
 	.high = (FUSE_BOOTSZ0 & FUSE_BOOTSZ1 & FUSE_SPIEN & FUSE_JTAGEN & FUSE_OCDEN),
 	.extended = (FUSE_BODLEVEL0),
 	};
+
+//uint8_t EEMEM fwVer = 1;
 
 /* -U lfuse:w:0x9f:m -U hfuse:w:0x19:m -U efuse:w:0xfd:m */
 
@@ -91,7 +95,7 @@ int main(void)
 				switch(op2)
 				{
 					case 'v':
-						printf("v%d,%.2f,%.2f\r\n", 12345, adc_read_vbat(), adc_read_current());
+						printf("v%ld,%.2f,%.2f\r\n", qe_position, adc_read_vbat(), adc_read_current());
 						break;
 					case 'p':
 						printf("p%d\r\n", ata6824_get_pwm() );

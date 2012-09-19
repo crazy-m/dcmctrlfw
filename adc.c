@@ -19,18 +19,15 @@
  */
 
 #include <avr/io.h>
+#include <avr/interrupt.h>
 
 #include "adc.h"
 
-static uint16_t adc_read_ch(uint8_t channel);
+volatile uint8_t adc_ch_index=0;
+volatile uint16_t adc_channel[ADC_CH_NO]={0};
 
 void adc_init(void)
 {
-	ADMUX  = _BV(REFS0); // AVCC with external capacitor on AREF pin
-	ADCSRA = _BV(ADEN) | _BV(ADPS2) | _BV(ADPS1) | _BV(ADPS0); // prescaler 128
-	ADCSRB = 0x00;
-	DIDR0 = _BV(ADC2D) | _BV(ADC1D) | _BV(ADC0D);
-
 	ADC0_DDR &= ~_BV(ADC0_PIO);
 	ADC1_DDR &= ~_BV(ADC1_PIO);
 	//ADC2_DDR &= ~_BV(ADC2_PIO);
@@ -39,23 +36,32 @@ void adc_init(void)
 	ADC1_PORT &= ~_BV(ADC1_PIO);
 	//ADC2_PORT &= ~_BV(ADC2_PIO);
 
+	ADMUX   = _BV(REFS0) | _BV(MUX0); // AVCC with external capacitor on AREF pin
+	ADCSRA  = _BV(ADEN) | _BV(ADIE); // ADC enable and ADC interrupt enable
+	ADCSRA |= _BV(ADPS2) | _BV(ADPS1) | _BV(ADPS0); // prescaler 128
+	ADCSRA |= _BV(ADSC); // start ADC
+	ADCSRB = 0x00;
+
+	DIDR0 = _BV(ADC1D) | _BV(ADC0D);
 }
+
 
 float adc_read_vbat(void)
 {
-	return ( (float)(adc_read_ch(0))*(24.0/1024.0)+0.9 ); //+0.9 error correction
+	return ( (float)(adc_channel[0])*(24.0/1024.0)+0.9 ); //+0.9 error correction
 }
 
 float adc_read_current(void)
 {
-	return ( (float)(adc_read_ch(1))*(30.24/1024.0)+0.0642 ); //+0.0642 error correction
+	return ( (float)(adc_channel[1])*(30.24/1024.0)+0.0642 ); //+0.0642 error correction
 }
 
-static uint16_t adc_read_ch(uint8_t channel)
+ISR(ADC_vect,ISR_NOBLOCK)
 {
+	adc_channel[adc_ch_index]=ADC;
+	if (++adc_ch_index>ADC_CH_NO) adc_ch_index=0;
 	ADMUX  &= 0xe0;
-	ADMUX  |= (channel&0x07);
+	ADMUX  |= (adc_ch_index&0x07);
 	ADCSRA |= _BV(ADSC);
-	loop_until_bit_is_set(ADCSRA, ADIF);
-	return ADC;
+
 }

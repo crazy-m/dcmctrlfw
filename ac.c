@@ -22,7 +22,10 @@
 #include <avr/interrupt.h>
 
 #include "ac.h"
+#include "ata6824.h"
 #include "led.h"
+
+overcurrent_t overcurrent;
 
 void ac_init(void)
 {
@@ -32,8 +35,8 @@ void ac_init(void)
 	AC_AIN0_PORT &= ~_BV(AC_AIN0_PIO);
 	AC_AIN1_PORT &= ~_BV(AC_AIN1_PIO);
 
-	DIDR1 = _BV(AIN1D) | _BV(AIN0D);
 	ACSR  = _BV(ACIE);
+	DIDR1 = _BV(AIN1D) | _BV(AIN0D);
 }
 
 ISR(ANALOG_COMP_vect)
@@ -42,12 +45,16 @@ ISR(ANALOG_COMP_vect)
 	{
 		// normal
 		TCCR1A |= _BV(COM1A1);
+		overcurrent.status = 0;
 		led_off(LED2);
 	}
 	else
 	{
 		// overcurrent
-		TCCR1A &= ~_BV(COM1A1);
+		//TCCR1A &= ~_BV(COM1A1);
+		//ata6824_set_pwm(0);
+		overcurrent.occured = 1;
+		overcurrent.status = 1;
 		led_on(LED2);
 	}
 }

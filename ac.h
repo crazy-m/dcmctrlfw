@@ -31,6 +31,15 @@
 #define AC_AIN1_PIN  PINE
 #define AC_AIN1_PIO  PE3
 
+typedef struct
+{
+	uint8_t occured	:1;
+	uint8_t status	:1;
+	uint8_t	notused	:6;
+} overcurrent_t;
+
+extern overcurrent_t overcurrent;
+
 void ac_init(void);
 
 #endif /* _AC_H_ */

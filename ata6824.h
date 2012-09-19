@@ -78,6 +78,7 @@ typedef enum
 	REVERSE,
 } ata6824_dir_t;
 */
+
 typedef enum
 {
 	NO_FAILURE,

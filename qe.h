@@ -44,6 +44,9 @@
 #define QE_CH_I_ISC  ISC31
 #define QE_CH_I_VECT INT3_vect
 
+extern volatile int32_t qe_position;
+extern volatile uint16_t qe_cycles;
+
 void qe_init(void);
 
 #endif /* _QE_H_ */

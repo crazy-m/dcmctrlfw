@@ -36,6 +36,10 @@
 #define ADC2_PIN  PINF
 #define ADC2_PIO  PF2
 
+#define ADC_CH_NO 2
+
+extern volatile uint16_t adc_channel[ADC_CH_NO];
+
 void adc_init(void);
 float adc_read_vbat(void);
 float adc_read_current(void);

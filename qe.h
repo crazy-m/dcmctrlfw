@@ -44,8 +44,10 @@
 #define QE_CH_I_ISC  ISC31
 #define QE_CH_I_VECT INT3_vect
 
-extern volatile int32_t qe_position;
 extern volatile uint16_t qe_cycles;
+extern volatile uint16_t qe_speed;
+extern volatile uint8_t  qe_direction;
+
 
 void qe_init(void);
 

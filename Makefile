@@ -81,7 +81,7 @@ OBJDIR = ./obj
 
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = main.c ac.c adc.c ata6824.c can.c i2c.c led.c qe.c usart.c
+SRC = main.c ac.c adc.c ata6824.c can.c i2c.c led.c qe.c timer.c usart.c
 
 
 # List C++ source files here. (C dependencies are automatically generated.)

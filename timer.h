@@ -18,43 +18,9 @@
  * along with dcmctrlfw. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <avr/io.h>
-#include <avr/interrupt.h>
+#ifndef _TIMER_H_
+#define _TIMER_H_
 
-#include "ac.h"
-#include "ata6824.h"
-#include "led.h"
+void timer_init(void);
 
-overcurrent_t overcurrent;
-
-void ac_init(void)
-{
-	AC_AIN0_DDR &= ~_BV(AC_AIN0_PIO);
-	AC_AIN1_DDR &= ~_BV(AC_AIN1_PIO);
-
-	AC_AIN0_PORT &= ~_BV(AC_AIN0_PIO);
-	AC_AIN1_PORT &= ~_BV(AC_AIN1_PIO);
-
-	ACSR  = _BV(ACIE);
-	DIDR1 = _BV(AIN1D) | _BV(AIN0D);
-}
-
-ISR(ANALOG_COMP_vect)
-{
-	if ( bit_is_set(ACSR, ACO) )
-	{
-		// normal
-		TCCR1A |= _BV(COM1A1);
-		overcurrent.status = 0;
-		led_off(LED2);
-	}
-	else
-	{
-		// overcurrent
-		TCCR1A &= ~_BV(COM1A1);
-		ata6824_set_pwm(0);
-		overcurrent.occured = 1;
-		overcurrent.status = 1;
-		led_on(LED2);
-	}
-}
+#endif /* _TIMER_H_ */

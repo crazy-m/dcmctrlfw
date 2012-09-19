@@ -63,5 +63,4 @@ ISR(ADC_vect,ISR_NOBLOCK)
 	ADMUX  &= 0xe0;
 	ADMUX  |= (adc_ch_index&0x07);
 	ADCSRA |= _BV(ADSC);
-
 }

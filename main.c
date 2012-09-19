@@ -36,6 +36,7 @@
 #include "i2c.h"
 #include "led.h"
 #include "qe.h"
+#include "timer.h"
 #include "usart.h"
 
 FUSES =
@@ -63,6 +64,7 @@ int main(void)
 	i2c_init();
 	led_init();
 	qe_init();
+	timer_init();
 	usart0_init();
 
 	sei(); // go live :-)
@@ -95,7 +97,7 @@ int main(void)
 				switch(op2)
 				{
 					case 'v':
-						printf("v%ld,%.2f,%.2f\r\n", qe_position, adc_read_vbat(), adc_read_current());
+						printf("v%d,%d,%.2f,%.2f\r\n", qe_direction, qe_speed, adc_read_vbat(), adc_read_current());
 						break;
 					case 'p':
 						printf("p%d\r\n", ata6824_get_pwm() );

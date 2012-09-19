@@ -24,8 +24,9 @@
 #include "qe.h"
 #include "led.h"
 
-volatile int32_t qe_position=0;
 volatile uint16_t qe_cycles=0;
+volatile uint16_t qe_speed=0;
+volatile uint8_t  qe_direction=0;
 
 void qe_init(void)
 {
@@ -42,20 +43,20 @@ void qe_init(void)
 }
 
 /* QE Ch. A */
-ISR(QE_CH_A_VECT,ISR_NOBLOCK)
+ISR(QE_CH_A_VECT)
 {
 	if ( (QE_CH_A_PIN & _BV(QE_CH_A_PIO))==(QE_CH_B_PIN & _BV(QE_CH_B_PIO)) )
 	{
-		//qe_position++;
-		qe_position=1;
+		//backward
+		qe_direction=1;
 	}else{
-		//qe_position--;
-		qe_position=0;
+		//forward
+		qe_direction=0;
 	}
 }
 
 /* QE Ch. I */
-ISR(QE_CH_I_VECT,ISR_NOBLOCK)
+ISR(QE_CH_I_VECT)
 {
 	qe_cycles++;
 }

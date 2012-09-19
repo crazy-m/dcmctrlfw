@@ -45,11 +45,6 @@ void ata6824_init(void)
 	EIMSK |= _BV(ATA6824_DIAG2_INT);
 	EIMSK |= _BV(ATA6824_DIAG3_INT);
 
-	/* WD Trigger */
-	TCCR0A = _BV(WGM01) | _BV(CS02) | _BV(CS00); // CTC,F_CPU/1024
-	TIMSK0 = _BV(OCIE0A);
-	OCR0A = 180; // 180*64us=11.52ms
-
 	/* PWM */
 	TCCR1A = _BV(COM1A1);
 	TCCR1B = _BV(WGM13) | _BV(CS10);
@@ -104,9 +99,3 @@ ISR(ATA6824_DIAG3_VECT)
 {
 	/* DIAG3 */
 }
-
-ISR(TIMER0_COMP_vect)
-{
-	ATA6824_TRIG_PORT ^= _BV(ATA6824_TRIG_PIO);
-}
-
